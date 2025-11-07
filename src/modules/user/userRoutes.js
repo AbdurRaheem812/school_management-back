@@ -1,11 +1,29 @@
 import { Router } from "express";
 import * as userController from "./userController.js";
+import { createUserValidation, updateUserValidation } from "./userValidation.js";
+import validate from "../../middlewares/validation.js";
+import verifyToken from "../../middlewares/authMiddleware.js";
 
 const router = Router();
 
-router.post("/users", userController.registerUser);
-router.get("/users/:id", userController.getUser);
-router.put("/users/:id", userController.updateUserInfo);
-router.delete("/users/:id", userController.deleteUserAccount);
+// Public routes
+router.post(
+  "/",
+  createUserValidation,
+  validate,
+  userController.registerUser
+);
+
+// Protected routes (require authentication)
+router.get("/", verifyToken, userController.getAllUsers);
+router.get("/:id", verifyToken, userController.getUser);
+router.put(
+  "/:id",
+  verifyToken,
+  updateUserValidation,
+  validate,
+  userController.updateUserInfo
+);
+router.delete("/:id", verifyToken, userController.deleteUserAccount);
 
 export default router;
