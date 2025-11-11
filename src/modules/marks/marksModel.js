@@ -24,20 +24,41 @@ const Marks = sequelize.define("Marks", {
       model: Subject,
       key: "id",
     },
-  },
-  marks: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
+  },  
   exam_type: {
     type: DataTypes.ENUM,
     values: ["MIDTERM", "FINAL", "QUIZ", "ASSIGNMENT"],
     allowNull: false,
   },
-  year: {
+  marks_obtained: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  total_marks: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+    defaultValue: 100, 
+  },
+  grade: {
+    type: DataTypes.STRING(5),
+    allowNull: true,
+  },
+  remarks: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
+},{
+  tableName: "marks",
+  timestamps: true,
+  createdAt: "created_at",
+  updatedAt: "updated_at",
 });
+
+Marks.belongsTo(Student, { foreignKey: "studentId" });
+
+Marks.belongsTo(Subject, { foreignKey: "subjectId" });
+
+Student.hasMany(Marks, { foreignKey: "studentId", onDelete: "CASCADE" });
+Subject.hasMany(Marks, { foreignKey: "subjectId", onDelete: "CASCADE" });
 
 export default Marks;

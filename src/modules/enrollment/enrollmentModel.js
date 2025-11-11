@@ -25,6 +25,32 @@ const Enrollment = sequelize.define("Enrollment", {
       key: "id",
     },
   },
+  enrolled_at: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: DataTypes.NOW,
+  },
+  status:{
+    type: DataTypes.ENUM("active","withdraw","completed"),
+    allowNull: false,
+    defaultValue: "active",
+  },
+  note: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
+},{
+  tableName: "enrollment",
+  timestamps: true,
+  createdAt: "created_at",
+  updatedAt: "updated_at",
 });
+
+Enrollment.belongsTo(Student, { foreignKey: "studentId" });
+
+Enrollment.belongsTo(Class, { foreignKey: "classId" });
+
+Student.hasMany(Enrollment, { foreignKey: "studentId", onDelete: "CASCADE" });
+Class.hasMany(Enrollment, { foreignKey: "classId", onDelete: "CASCADE" });
 
 export default Enrollment;

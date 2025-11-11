@@ -1,6 +1,8 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../../config/database.js";
 import Class from "../class/classModel.js";
+import Attendence from "../attendence/attendenceModel.js";
+import Marks from "../marks/marksModel.js";
 
 const Subject = sequelize.define(
   "Subject",
@@ -42,5 +44,11 @@ const Subject = sequelize.define(
     timestamps: true,
   }
 );
+
+Subject.belongsTo(Class, { foreignKey: "classId" });
+
+Subject.hasMany(Attendence, { foreignKey: "subjectId", onDelete: "CASCADE" });
+
+Subject.hasMany(Marks, { foreignKey: "subjectId", onDelete: "CASCADE" });
 
 export default Subject;

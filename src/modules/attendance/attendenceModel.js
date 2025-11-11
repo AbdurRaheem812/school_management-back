@@ -3,13 +3,13 @@ import sequelize from "../../config/database.js";
 import Student from "../student/studentModel.js";
 import Subject from "../subject/subjectModel.js";
 
-const Attendance = sequelize.define(
-  "Attendance",
+const Attendence = sequelize.define(
+  "Attendence",
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true, // Fixed: Was autoincrement
+      autoIncrement: true, 
     },
     studentId: {
       type: DataTypes.INTEGER,
@@ -46,7 +46,7 @@ const Attendance = sequelize.define(
     },
   },
   {
-    tableName: "attendance", // Fixed: Added quotes
+    tableName: "attendance", 
     timestamps: true,
     indexes: [
       {
@@ -57,4 +57,11 @@ const Attendance = sequelize.define(
   }
 );
 
-export default Attendance;
+Attendence.belongsTo(Student, { foreignKey: "studentId" });
+
+Attendence.belongsTo(Subject, { foreignKey: "subjectId" });
+
+Student.hasMany(Attendence, { foreignKey: "studentId", onDelete: "CASCADE" });
+Subject.hasMany(Attendence, { foreignKey: "subjectId", onDelete: "CASCADE" });
+
+export default Attendence;

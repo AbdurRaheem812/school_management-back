@@ -1,5 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../../config/database.js";
+import Teacher from "../teacher/teacherModel.js";
+import Student from "../student/studentModel.js";
 
 const User = sequelize.define(
   "User",
@@ -44,5 +46,9 @@ const User = sequelize.define(
     timestamps: true,
   }
 );
+
+User.hasOne(Teacher, { foreignKey: "userId", onDelete: "CASCADE" });
+
+User.hasOne(Student, { foreignKey: "userId", onDelete: "CASCADE" });
 
 export default User;

@@ -1,6 +1,9 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../../config/database.js";
 import Teacher from "../teacher/teacherModel.js";
+import Subject from "../subject/subjectModel.js";
+import Student from "../student/studentModel.js";
+import Enrollment from "../enrollment/enrollmentModel.js";
 
 const Class = sequelize.define(
   "Class",
@@ -41,5 +44,18 @@ const Class = sequelize.define(
     timestamps: true,
   }
 );
+
+Class.belongsTo(Teacher, { foreignKey: "teacherId" });
+
+Class.hasMany(Subject, { foreignKey: "classId", onDelete: "CASCADE" });
+
+Class.belongsToMany(Student, {
+  through: Enrollment,
+  foreignKey: "classId",
+  otherKey: "studentId",
+  onDelete: "CASCADE",
+});
+
+Class.hasMany(Enrollment, { foreignKey: "classId", onDelete: "CASCADE" });
 
 export default Class;

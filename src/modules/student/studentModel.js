@@ -1,6 +1,10 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../../config/database.js";
 import User from "../user/userModel.js";
+import Class from "../class/classModel.js";
+import Enrollment from "../enrollment/enrollmentModel.js";
+import Attendence from "../attendence/attendenceModel.js";
+import Marks from "../marks/marksModel.js";
 
 const Student = sequelize.define(
   "Student",
@@ -45,5 +49,20 @@ const Student = sequelize.define(
     timestamps: true,
   }
 );
+
+Student.belongsTo(User, { foreignKey: "userId" });
+
+Student.belongsToMany(Class, {
+  through: Enrollment,
+  foreignKey: "studentId",
+  otherKey: "classId",
+  onDelete: "CASCADE",
+});
+
+Student.hasMany(Attendence, { foreignKey: "studentId", onDelete: "CASCADE" });
+
+Student.hasMany(Enrollment, { foreignKey: "studentId", onDelete: "CASCADE" });
+
+Student.hasMany(Marks, { foreignKey: "studentId", onDelete: "CASCADE" });
 
 export default Student;
