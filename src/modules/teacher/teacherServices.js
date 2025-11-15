@@ -1,4 +1,4 @@
-import {Teacher} from "./teacherModel.js";
+import Teacher from "./teacherModel.js";
 
 export const createTeacher = async (teacherData) => {
     return await Teacher.create(teacherData);
@@ -9,7 +9,7 @@ export const getAllTeachers = async ()=>{
 };
 
 export const getTeacherById = async (id)=>{
-    return await Teacher.findById(id);
+    return await Teacher.findByPk(id);
 }; 
 
 export const updateTeacher = async (id, updateData) => {

@@ -1,4 +1,4 @@
-import * as teacherService from "./teacherServices";
+import * as teacherService from "./teacherServices.js";
 
 export const createTeacher = async (req, res)=>{
 try{

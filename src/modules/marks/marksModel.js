@@ -7,7 +7,7 @@ const Marks = sequelize.define("Marks", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    autoincrement: true,
+    autoIncrement: true,
   },
   studentId: {
     type: DataTypes.INTEGER,

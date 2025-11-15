@@ -1,5 +1,5 @@
 import { validationResult } from "express-validator";
-import * as marksService from "./marksService.js";
+import * as marksService from "./marksServices.js";
 
 export async function createMark(req, res, next) {
   try {

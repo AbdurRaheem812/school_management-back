@@ -1,4 +1,4 @@
-import { User } from "../../models/index.js";
+import User from "./userModel.js";
 import { hashPassword } from "../../utils/bcrypt.js";
 
 export const createUser = async (userData) => {
@@ -8,6 +8,11 @@ export const createUser = async (userData) => {
   return await User.create(userData);
 };
 
+export const getAllUsers = async () => {
+  return await User.findAll({
+    attributes: { exclude: ['password'] }
+  }); 
+}
 export const getUserByEmail = async (email) => {
   return await User.findOne({ where: { email } });
 };

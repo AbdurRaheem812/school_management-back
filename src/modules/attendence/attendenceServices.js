@@ -1,4 +1,4 @@
-import Attendance from "./attendanceModel.js";
+import Attendance from "./attendenceModel.js";
 import Student from "../student/studentModel.js";
 import Subject from "../subject/subjectModel.js";
 

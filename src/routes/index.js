@@ -1,4 +1,5 @@
 import { Router } from "express";
+import authRoutes from "../modules/auth/authRoutes.js";
 import userRoutes from "../modules/user/userRoutes.js";
 import studentRoutes from "../modules/student/studentRoutes.js";
 import teacherRoutes from "../modules/teacher/teacherRoutes.js";
@@ -10,6 +11,7 @@ import subjectRoutes from "../modules/subject/subjectRoutes.js";
 
 const router = Router();
 
+router.use("/auth", authRoutes);
 router.use("/users",userRoutes);
 router.use("/teachers",teacherRoutes);
 router.use("/students",studentRoutes);

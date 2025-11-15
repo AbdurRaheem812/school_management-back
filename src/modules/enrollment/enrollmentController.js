@@ -1,5 +1,5 @@
 import { validationResult } from "express-validator";
-import * as enrollmentService from "./enrollmentService.js";
+import * as enrollmentService from "./enrollmentServices.js";
 
 export async function createEnrollment(req, res, next) {
   try {

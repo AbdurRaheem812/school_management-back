@@ -1,7 +1,6 @@
 import Marks from './marksModel.js';
-import Students from '../students/studentsModel.js';
-import Subjects from '../subjects/subjectsModel.js';
-import e from 'cors';
+import Students from '../student/studentModel.js';
+import Subjects from '../subject/subjectModel.js';
 
 export async function addMarks(payload){
     const { studentId, subjectId, marks_obtained, total_marks=100, exam_type } = payload;

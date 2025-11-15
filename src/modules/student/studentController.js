@@ -1,4 +1,4 @@
-import * as studentService from "./studentService.js";
+import * as studentService from "./studentServices.js";
 
 export const createStudent = async (req, res) => {
   try {

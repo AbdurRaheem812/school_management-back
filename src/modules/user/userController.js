@@ -1,4 +1,4 @@
-import * as userService from "./userService.js";
+import * as userService from "./userServices.js";
 import logger from "../../config/logger.js";
 
 export const registerUser = async (req, res, next) => {
